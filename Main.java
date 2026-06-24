@@ -18,74 +18,24 @@ public class Main {
                 case 2 :
                         displayStudents(students);
                         break;
-                case 3 :System.out.println("Enter id for searching:");
-                        int ch=sc.nextInt();
-                        boolean found = false;
-                        for(int i=0;i<students.size();i++){
-                            Student d=students.get(i);
-                            if(d.id==ch){
-                                found = true;
-                                d.display();
-                                System.out.println("Student found");
-                                break;
-                            }
-                        }
-                        if(!found){
-                            System.out.println("Student not found");
-                        }
-                        
+                case 3 :
+                        searchStudent(students, sc);
                         break;
-                case 4 :System.out.println("Enter id for deleting:");
-                        int cho=sc.nextInt();
-                        found = false;
-                        for(int i=0;i<students.size();i++){
-                            Student de=students.get(i);
-                            if(de.id==cho){
-                                found = true;
-                                students.remove(de);
-                                System.out.println("Student deleted");
-                                break;
-                            }
-                        }
-                        if(!found){
-                            System.out.println("Student not found");
-                        }
-                        
+                case 4 :
+                        deleteStudent(students, sc);
                         break;
-                case 5 :System.out.println("Enter id for updating:");
-                        cho=sc.nextInt();
-                        found = false;
-                        for(int i=0;i<students.size();i++){
-                            Student de=students.get(i);
-                            if(de.id==cho){
-                                found = true;
-                                System.out.print("Enter new id:");
-                                int newId=sc.nextInt();
-                                de.id=newId;
-                                sc.nextLine(); // consume the newline character after nextInt()
-                                System.out.print("Enter new name:");
-                                String newName=sc.nextLine();
-                                de.name=newName;
-                                System.out.print("Enter new branch:");
-                                String newBranch=sc.nextLine();
-                                de.branch=newBranch;
-                                System.out.println("Student updated");
-                                break;
-                            }
-                        }
-                        if(!found){
-                            System.out.println("Student not found");
-                        }
-                        
+                case 5 :
+                        updateStudent(students, sc);
                         break;
                 case 6 :
-                        System.out.println("Exit");
+                        exitProgram();
                         break;
-                default:System.out.println("Invalid choice");
-
+                default:
+                        System.out.println("Invalid choice");
             }
         }
     }
+                                
     public static void addStudent(ArrayList<Student> students, Scanner sc) {
         System.out.print("Enter id:");
         int id = sc.nextInt();
@@ -121,7 +71,69 @@ public class Main {
             System.out.println("Displayed students");
         }
     }
-    
+    public static void searchStudent(ArrayList<Student> students, Scanner sc) {
+        System.out.print("Enter id for searching:");
+        int id = sc.nextInt();
+        boolean found = false;
+        for (int i = 0; i < students.size(); i++) {
+            Student d = students.get(i);
+            if (d.id == id) {
+                found = true;
+                d.display();
+                System.out.println("Student found");
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Student not found");
+        }
+    }
+    public static void deleteStudent(ArrayList<Student> students, Scanner sc) {
+        System.out.print("Enter id for deleting:");
+        int id = sc.nextInt();
+        boolean found = false;
+        for (int i = 0; i < students.size(); i++) {
+            Student d = students.get(i);
+            if (d.id == id) {
+                found = true;
+                students.remove(d);
+                System.out.println("Student deleted");
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Student not found");
+        }
+    }
+    public static void updateStudent(ArrayList<Student> students, Scanner sc) {
+        System.out.print("Enter id for updating:");
+        int id = sc.nextInt();
+        boolean found = false;
+        for (int i = 0; i < students.size(); i++) {
+            Student d = students.get(i);
+            if (d.id == id) {
+                found = true;
+                System.out.print("Enter new id:");
+                int newId = sc.nextInt();
+                d.id = newId;
+                sc.nextLine(); // consume the newline character after nextInt()
+                System.out.print("Enter new name:");
+                String newName = sc.nextLine();
+                d.name = newName;
+                System.out.print("Enter new branch:");
+                String newBranch = sc.nextLine();
+                d.branch = newBranch;
+                System.out.println("Student updated");
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Student not found");
+        }
+    }
+    public static void exitProgram() {
+        System.out.println("Exiting program...");
+    }
         
            
     
