@@ -15,16 +15,33 @@ public class Main {
                 case 1 :System.out.print("Enter id:");
                         int id=sc.nextInt();
                         sc.nextLine(); // consume the newline character after nextInt()
-     
-                        System.out.print("Enter name:");
-                        String name=sc.nextLine();
+                        boolean duplicate=false;
+                        for(int i=0;i<students.size();i++){
+                            Student d=students.get(i);
+                            if(d.id==id){
+                                
+                                duplicate=true;
+                                break;
+                            }
+                        }
+                        if(duplicate){
+                            System.out.println("student already exists!");
+                            break;
+                        }else{
+                                System.out.print("Enter name:");
+                                String name=sc.nextLine();
       
-                        System.out.print("Enter branch:");
-                        String branch=sc.nextLine();
-                        Student s=new Student(id,name,branch);
-                        students.add(s);
-                        System.out.println("Student added successfully");
-                        break;
+                                System.out.print("Enter branch:");
+                                String branch=sc.nextLine();
+                                Student s=new Student(id,name,branch);
+                                students.add(s);
+                                System.out.println("Student added successfully");
+                                break;
+                            
+                            }
+                        
+                    
+                        
 
                 case 2 :if(students.isEmpty()){
                             System.out.println("No students to display");
