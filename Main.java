@@ -12,49 +12,11 @@ public class Main {
             choice=sc.nextInt();
             sc.nextLine(); // consume the newline character after nextInt()
             switch(choice){
-                case 1 :System.out.print("Enter id:");
-                        int id=sc.nextInt();
-                        sc.nextLine(); // consume the newline character after nextInt()
-                        boolean duplicate=false;
-                        for(int i=0;i<students.size();i++){
-                            Student d=students.get(i);
-                            if(d.id==id){
-                                
-                                duplicate=true;
-                                break;
-                            }
-                        }
-                        if(duplicate){
-                            System.out.println("student already exists!");
-                            break;
-                        }else{
-                                System.out.print("Enter name:");
-                                String name=sc.nextLine();
-      
-                                System.out.print("Enter branch:");
-                                String branch=sc.nextLine();
-                                Student s=new Student(id,name,branch);
-                                students.add(s);
-                                System.out.println("Student added successfully");
-                                break;
-                            
-                            }
-                        
-                    
-                        
-
-                case 2 :if(students.isEmpty()){
-                            System.out.println("No students to display");
-                        
-                        }else{
-                            System.out.println("Displaying students:");
-                            for(int i=0;i<students.size();i++){
-                                Student c=students.get(i);
-                                c.display();
-
-                            }
-                            System.out.println("Displayed students");
-                        }
+                case 1 :
+                        addStudent(students, sc);
+                        break;
+                case 2 :
+                        displayStudents(students);
                         break;
                 case 3 :System.out.println("Enter id for searching:");
                         int ch=sc.nextInt();
@@ -122,7 +84,46 @@ public class Main {
                 default:System.out.println("Invalid choice");
 
             }
-        }    
+        }
     }
+    public static void addStudent(ArrayList<Student> students, Scanner sc) {
+        System.out.print("Enter id:");
+        int id = sc.nextInt();
+        sc.nextLine(); // consume the newline character after nextInt()
+        boolean duplicate = false;
+        for (int i = 0; i < students.size(); i++) {
+            Student d = students.get(i);
+            if (d.id == id) {
+                duplicate = true;
+                break;
+            }
+        }
+        if (duplicate) {
+            System.out.println("Student already exists!");
+        } else {
+            System.out.print("Enter name:");
+            String name = sc.nextLine();
+            System.out.print("Enter branch:");
+            String branch = sc.nextLine();
+            Student s = new Student(id, name, branch);
+            students.add(s);
+            System.out.println("Student added successfully");
+        }
+    }
+    public static void displayStudents(ArrayList<Student> students) {
+        if (students.isEmpty()) {
+            System.out.println("No students to display");
+        } else {
+            System.out.println("Displaying students:");
+            for (Student c : students) {
+                c.display();
+            }
+            System.out.println("Displayed students");
+        }
+    }
+    
+        
+           
+    
     
 }
