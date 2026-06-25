@@ -1,10 +1,14 @@
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String args[]){
         ArrayList<Student> students=new ArrayList<>();
+        loadFromFile(students);
         Scanner sc=new Scanner(System.in); 
         int choice=0;
         while(choice!=6){
@@ -57,6 +61,7 @@ public class Main {
             String branch = sc.nextLine();
             Student s = new Student(id, name, branch);
             students.add(s);
+            saveToFile(students);
             System.out.println("Student added successfully");
         }
     }
@@ -68,6 +73,7 @@ public class Main {
             for (Student c : students) {
                 c.display();
             }
+            saveToFile(students);
             System.out.println("Displayed students");
         }
     }
@@ -80,6 +86,7 @@ public class Main {
             if (d.id == id) {
                 found = true;
                 d.display();
+                
                 System.out.println("Student found");
                 break;
             }
@@ -123,6 +130,7 @@ public class Main {
                 System.out.print("Enter new branch:");
                 String newBranch = sc.nextLine();
                 d.branch = newBranch;
+                saveToFile(students);
                 System.out.println("Student updated");
                 break;
             }
@@ -134,8 +142,37 @@ public class Main {
     public static void exitProgram() {
         System.out.println("Exiting program...");
     }
+    public static void saveToFile(ArrayList<Student> students) {
+        // Implement file saving logic here
         
-           
-    
-    
+        try{
+            FileWriter fw = new FileWriter("students.txt");
+            for(int i=0;i<students.size();i++){
+                Student s=students.get(i);
+                fw.write(s.id+","+s.name+","+s.branch+"\n");
+            }
+            fw.close();
+        } catch (Exception e) { 
+            
+            System.out.println("Error saving to file: " + e.getMessage());
+        }
+        
+    }
+    public static void loadFromFile(ArrayList<Student> students) {
+        // Implement file loading logic here
+        // This method can be called at the start of the program to load existing students from a file
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("students.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                Student st = new Student(Integer.parseInt(data[0]), data[1], data[2]);
+                students.add(st);
+            }
+            br.close();
+        } catch (Exception e) {
+            System.out.println("Error loading from file: " + e.getMessage());
+        }
+    }
+
 }
